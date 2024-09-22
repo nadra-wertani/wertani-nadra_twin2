@@ -1,36 +1,18 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-4" style="margin-bottom: 20px;">
-        <img src="assets/images/image.png" alt="Grand électroménager" class="img-fluid h-50 w-75">
-        <h3>Grand électroménager</h3>
-        <button class="btn btn-primary">Voir produits</button>
-      </div>
-   
-   
-      <div class="col-md-4" style="margin-bottom: 20px;">
-        <img src="assets/images/imagangu1.PNG" alt="Petit électroménager" class="img-fluid h-50 w-75">
-        <h3>Petit électroménager</h3>
-        <button class="btn btn-primary">Voir produits</button>
-      </div>
-      <div class="col-md-4" style="margin-bottom: 20px;">
-        <img src="assets/images/imageangu2.PNG" alt="Produits informatiques" class="img-fluid h-50 w-75">
-        <h3>Produits informatiques</h3>
-        <button class="btn btn-primary">Voir produits</button>
-      </div>
-      <div class="col-md-4" style="margin-bottom: 20px;">
-        <img src="assets/images/smartagu.PNG" alt="Smart Phones" class="img-fluid h-50 w-75">
-        <h3>Smart Phones</h3>
-        <button class="btn btn-primary">Voir produits</button>
-      </div>
-      <div class="col-md-4" style="margin-bottom: 20px;">
-        <img src="assets/images/tv.PNG" alt="TV, images et son" class="img-fluid h-50 w-75">
-        <h3>TV, images et son</h3>
-        <button class="btn btn-primary">Voir produits</button>
-      </div>
-      <div class="col-md-4" style="margin-bottom: 20px;">
-        <img src="assets/images/voitre.PNG" alt="Produits voitures" class="img-fluid h-50 w-75">
-        <h3>Produits voiture</h3>
-        <button class="btn btn-primary">Voir produits</button>
+  <div class="form-group">
+    <input type="text" class="form-control" id="find" placeholder="Titre catégorie" [(ngModel)]="titre" #title="ngModel">
+  </div>
+  
+  <div class="row">
+    <!-- Affiche les catégories si elles correspondent à la valeur de recherche ou si aucune valeur n'est saisie -->
+    <div class="col-md-4" style="margin-bottom: 20px;" *ngFor="let categorie of categories">
+      <div *ngIf="title.value == '' || categorie.title == title.value">
+                <img (click)="getDescription(categorie.description)" [src]="categorie.image" [alt]="categorie.title" class="img-fluid h-50 w-75">
+        <h3>{{categorie.title | uppercase}}</h3>
+
+        <button class="btn btn-primary" *ngIf="categorie.available">Voir produits</button>
+        <span *ngIf="!categorie.available" class="text-danger">Non disponible</span>
       </div>
     </div>
   </div>
+</div>
